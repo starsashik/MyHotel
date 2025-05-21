@@ -1,0 +1,31 @@
+/*admin-page and users-page*/
+/*_____________________________________________________________*/
+.bookings-page{
+    max-width: 80%;
+    margin: 5rem auto;
+    text-align: left;
+}
+
+.bookings-page li{
+    list-style-type: none;
+    margin-top: 1rem;
+}
+
+.bookings-page h1{
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.bookings-page .err-message{
+    color: #bc001e;
+    text-align: left;
+    font-weight: 300;
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: auto;
+}
+
+
+/*_____________________________________________________________*/
