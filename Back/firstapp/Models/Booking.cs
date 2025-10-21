@@ -26,15 +26,16 @@ public class Booking
     {
         var error = string.Empty;
 
-        if (BIsCreat && (CheckInDate < NowTime || CheckOutDate < NowTime))
-        {
-            error = $" Dates can't be less than now {NowTime}.";
-        }
-        else if (BIsCreat && (CheckInDate > MaxTime || CheckOutDate > MaxTime))
-        {
-            error = $" Dates can't be greater than {MaxTime}.";
-        }
-        else if (CheckOutDate < CheckInDate)
+        // if (BIsCreat && (CheckInDate < NowTime || CheckOutDate < NowTime))
+        // {
+        //     error = $" Dates can't be less than now {NowTime}.";
+        // }
+        // else if (BIsCreat && (CheckInDate > MaxTime || CheckOutDate > MaxTime))
+        // {
+        //     error = $" Dates can't be greater than {MaxTime}.";
+        // }
+        // else
+        if (CheckOutDate < CheckInDate)
         {
             error = $" Date OUT can't be lese then date IN.";
         }
