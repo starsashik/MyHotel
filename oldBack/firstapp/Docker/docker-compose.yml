@@ -1,0 +1,28 @@
+services:
+  hotel-db:
+    image: postgres:17
+    container_name: hotel-postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5454:5432"
+    volumes:
+      - hotel_postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+  hotel-backend:
+    container_name: hotel-backend
+    build:
+      context: ../
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__MyHotel=${DB_CONNECTION_STRING}
+    depends_on:
+      - hotel-db
+
+volumes:
+  hotel_postgres_data:

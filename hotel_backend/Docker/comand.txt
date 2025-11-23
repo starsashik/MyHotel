@@ -1,0 +1,5 @@
+﻿pg_dump -h localhost -p 5432 -U postgres -W -F c -f dump.dump MyHotel
+docker-compose up -d --build
+docker ps
+docker logs __name__
+docker-compose down
