@@ -121,6 +121,8 @@ app.UseFileServer();
 // Поддержка сессии
 app.UseSession();
 
+app.UseRouting();
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

@@ -18,6 +18,24 @@ body {
 }
 /*_____________________________________________________________*/
 
+/*Layout*/
+/*_____________________________________________________________*/
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 122px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+/*_____________________________________________________________*/
+
 /*wrapper*/
 /*_____________________________________________________________*/
 .wrapper {
@@ -108,7 +126,7 @@ header .admin-mode-warn p {
     margin: 30px auto;
     height: 0;
     padding-top: 45%;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("img/1920x.png") no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../../img/1920x.png") no-repeat center center;
     background-size: cover;
     overflow: hidden;
     border-radius: 10px;

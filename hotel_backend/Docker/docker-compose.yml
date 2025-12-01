@@ -22,26 +22,27 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__MyHotel=${DB_CONNECTION_STRING}
+      - ConnectionStrings__MyDbContext=${DB_CONNECTION_STRING}
     depends_on:
       - hotel-db
     volumes:
+      - ../Static:/app/Static
       - ./../data-keys:/root/.aspnet/DataProtection-Keys  # опция: сохранять keys между перезапусками
 
-  hotel-frontend:
-    container_name: hotel-frontend
-    build:
-      context: ../../hotel-frontend
-      dockerfile: Dockerfile.dev
-    environment:
-      - HOST=0.0.0.0
-      - CHOKIDAR_USEPOLLING=true
-      - VITE_API_URL=http://localhost:5045 # если фронт обращается к бэку
-    command: [ "npm", "run", "dev", "--", "--host", "0.0.0.0" ]
-    ports:
-      - "5147:3000"   # dev server (CRA/Vite)
-    depends_on:
-      - hotel-backend
+#  hotel-frontend:
+#    container_name: hotel-frontend
+#    build:
+#      context: ../../hotel-frontend
+#      dockerfile: Dockerfile.dev
+#    environment:
+#      - HOST=0.0.0.0
+#      - CHOKIDAR_USEPOLLING=true
+#      - VITE_API_URL=http://localhost:5045 # если фронт обращается к бэку
+#    command: [ "npm", "run", "dev", "--", "--host", "0.0.0.0" ]
+#    ports:
+#      - "5147:3000"   # dev server (CRA/Vite)
+#    depends_on:
+#      - hotel-backend
 
 volumes:
   hotel_postgres_data:

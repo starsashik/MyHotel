@@ -161,7 +161,7 @@ public class AuthorizationService : IAuthorizationService
             IssuerSigningKey = new SymmetricSecurityKey(key),
             ValidateIssuer = true,
             ValidIssuer = _configuration["Jwt:Issuer"],
-            ValidateAudience = true,
+            ValidateAudience = !string.IsNullOrEmpty(_configuration["Jwt:Audience"]),
             ValidAudience = _configuration["Jwt:Audience"],
             ValidateLifetime = true
         };
