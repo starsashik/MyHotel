@@ -9,41 +9,8 @@ import AdminPage from "../../Pages/AdminPage.tsx";
 import ProfilePage from "../../Pages/ProfilePage.tsx";
 import BookingsPage from "../../Pages/BookingsPage.tsx";
 import RoomsPage from "../../Pages/RoomsPage.tsx";
-import {useAppDispatch, useAppSelector} from "../../redux/Hooks.tsx";
-import {useEffect} from "react";
-import {GetCurrentUser} from "../../api/AppApi.ts";
-import {setAccessLvl, setEmail, setIsLoggedIn, setToken, setUserId} from "../../redux/UserSlice.tsx";
-import {setHotelId, setRoomId} from "../../redux/HotelSlice.tsx";
 
 export const AppRouter = () => {
-
-    const user = useAppSelector((state) => state.user);
-    const dispatch = useAppDispatch();
-
-
-    useEffect(() => {
-        //SetEmptyCookiesApi().then(() => {
-        GetCurrentUser().then((res) => {
-            if (res.data.Email != "")
-            {
-                dispatch(setIsLoggedIn(true));
-            }
-            else
-            {
-                dispatch(setIsLoggedIn(false));
-            }
-            dispatch(setEmail(res.data.Email));
-            dispatch(setAccessLvl(res.data.AsseccLvl));
-            dispatch(setToken(res.data.Token));
-            dispatch(setHotelId(""));
-            dispatch(setRoomId(""));
-            dispatch(setUserId(res.data.UserId));
-            console.log(user);
-        });
-        //});
-    }, [])
-
-
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/home"/>}/>

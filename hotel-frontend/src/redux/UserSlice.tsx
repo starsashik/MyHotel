@@ -6,6 +6,7 @@ export interface UserState {
     accessLvl: number;
     token: string;
     userId: string;
+    update: number;
 }
 
 const initialState: UserState = {
@@ -13,7 +14,8 @@ const initialState: UserState = {
     email: "",
     accessLvl: -1,
     token: "",
-    userId: ""
+    userId: "",
+    update: 0
 }
 
 export const userSlice = createSlice({
@@ -34,8 +36,11 @@ export const userSlice = createSlice({
         },
         setUserId: (state, action: PayloadAction<string>) => {
             state.userId = action.payload;
-        }
+        },
+        setUpdate: (state) => {
+            state.update = state.update + 1;
+        },
     }
 })
 
-export const {setIsLoggedIn, setEmail, setAccessLvl, setToken, setUserId} = userSlice.actions
+export const {setIsLoggedIn, setEmail, setAccessLvl, setToken, setUserId, setUpdate} = userSlice.actions

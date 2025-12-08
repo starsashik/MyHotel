@@ -3,7 +3,7 @@ import {Button} from "react-bootstrap";
 import {GetCurrentUser, RegistrationUser} from "../api/AppApi.ts";
 import {useAppDispatch, useAppSelector} from "../redux/Hooks.tsx";
 import {useNavigate} from "react-router-dom";
-import {setAccessLvl, setEmail, setIsLoggedIn, setToken, setUserId} from "../redux/UserSlice.tsx";
+import {setIsLoggedIn, setUpdate} from "../redux/UserSlice.tsx";
 import "../css/RegistrationPage.css"
 
 const Registration = () => {
@@ -25,7 +25,7 @@ const Registration = () => {
         if (user.isLoggedIn) {
             navigate("/");
         }
-    }, [user.isLoggedIn])
+    }, [user.isLoggedIn, navigate])
 
 
     const handleSubmit = (e: FormEvent) => {
@@ -41,16 +41,11 @@ const Registration = () => {
             try {
                 await RegistrationUser(username, email, password);
                 const res = await GetCurrentUser();
-
+                console.log(res.data)
                 if (res.data.Email !== "") {
                     dispatch(setIsLoggedIn(true));
-                } else {
-                    dispatch(setIsLoggedIn(false));
+                    dispatch(setUpdate());
                 }
-                dispatch(setEmail(res.data.Email));
-                dispatch(setAccessLvl(res.data.AsseccLvl));
-                dispatch(setToken(res.data.Token));
-                dispatch(setUserId(res.data.UserId));
 
                 setErrorMessage('');
             } catch (error: any) {

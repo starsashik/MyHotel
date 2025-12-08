@@ -1,52 +1,26 @@
 import {NavLink, useNavigate} from "react-router-dom";
-import {setAccessLvl, setEmail, setIsLoggedIn, setToken, setUserId} from "../redux/UserSlice.tsx";
-import {GetCurrentUser, LogoutUser} from "../api/AppApi.ts";
+import {setUpdate} from "../redux/UserSlice.tsx";
+import {LogoutUser} from "../api/AppApi.ts";
 import {useAppDispatch, useAppSelector} from "../redux/Hooks.tsx";
-import {useEffect, useState} from "react";
+import {useEffect,} from "react";
 
 const Header = () => {
     const user = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [isLogged, setIsLogged] = useState<boolean>(false);
-    const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
+    const isLogged = user.isLoggedIn;
+    const isAdminMode = user.accessLvl === 2;
 
     useEffect(() => {
-        console.error(user.accessLvl)
-        console.error(user.isLoggedIn)
-        if (user.isLoggedIn) {
-            setIsLogged(true);
-            if (user.accessLvl == 2) {
-                setIsAdminMode(true);
-            } else {
-                setIsAdminMode(false);
-            }
-        } else {
-            setIsLogged(false);
-            setIsAdminMode(false);
-        }
-    }, [user.accessLvl])
+        console.log(user.email);
+    }, []);
 
     const handleLogout = () => {
         LogoutUser().then(() => {
-            GetCurrentUser().then((res) => {
-                if (res.data.Email != "")
-                {
-                    dispatch(setIsLoggedIn(true));
-                }
-                else
-                {
-                    dispatch(setIsLoggedIn(false));
-                }
-                dispatch(setEmail(res.data.Email));
-                dispatch(setAccessLvl(res.data.AsseccLvl));
-                dispatch(setToken(res.data.Token));
-                dispatch(setUserId(res.data.UserId));
-            }).then(() => {
-                navigate("/");
-            })
+            dispatch(setUpdate());
+            navigate("/");
         });
-    }
+    };
 
     return (
         <header>
